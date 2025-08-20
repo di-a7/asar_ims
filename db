@@ -1,0 +1,36 @@
+# Inventory Management System (Office)
+
+# User 
+   - id  [PK]
+   - username  [char]
+   - password  [char]
+   - Email  [email]
+   - phone_number [char]
+   - address   [char]
+
+# Department
+   - id  [PK]
+   - name   [char]  -HR
+
+# ProductCategory
+   - id  [PK]
+   - name   [char] - stat
+
+# Products
+   - id  [PK]
+   - name   [char]  - pen
+   - description  [char/text]
+   - stock  [int]
+   - ProductCategory [Foreign Key]
+   - Department   [Foreign Key]  
+
+# Supplier
+   - id  [PK]
+   - name   [char]
+
+# Purchase
+   - id  [PK]
+   - Product   [Foreign Key]
+   - quantity  [int]
+   - Price  [float]
+   - Supplier  [FK]
