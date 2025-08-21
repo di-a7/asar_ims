@@ -20,8 +20,24 @@ class ProductsAdmin(admin.ModelAdmin):
    autocomplete_fields = ['category','department']
    
 admin.site.register(Products,ProductsAdmin)
+
 admin.site.register(Supplier)
-admin.site.register(Purchase)
-admin.site.register(PurchaseItem)
+
+
+
+class PurchaseItemInline(admin.TabularInline):
+   model = PurchaseItem
+   extra = 0
+
+class PurchaseAdmin(admin.ModelAdmin):
+   list_display = ['id','quantity','price','supplier']
+   list_filter = ['supplier__name', 'quantity']
+   inlines = [PurchaseItemInline]
+
+admin.site.register(Purchase,PurchaseAdmin)
+
+# class PurchaseItemAdmin(admin.ModelAdmin):
+#    list_display = ['id','product','purchase']
+# admin.site.register(PurchaseItem,PurchaseItemAdmin)
 
 # supplier ko admin
