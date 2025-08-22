@@ -1,5 +1,6 @@
 from django.urls import path, include
-from .views import list_departments
+from .views import departments, department
 urlpatterns = [
-   path('departments/', list_departments)
+   path('departments/', departments),
+   path('departments/<id>/', department),
 ]
