@@ -10,6 +10,7 @@ from rest_framework.generics import ListAPIView, CreateAPIView, ListCreateAPIVie
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.serializers import ValidationError
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.filters import SearchFilter
 # Create your views here.
 
 class DepartmentViewset(ModelViewSet):
@@ -37,6 +38,8 @@ class ProductViewset(ModelViewSet):
    queryset = Products.objects.select_related('category','department').all()
    serializer_class = ProductSerializer
    pagination_class = PageNumberPagination
+   filter_backends = [SearchFilter]
+   search_fields = ['name','stock']
 
 
 
