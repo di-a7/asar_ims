@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.contrib.auth import get_user_model
+User = get_user_model()
 # Create your models here.
 class Department(models.Model):
    name = models.CharField(max_length=100)
@@ -40,7 +41,7 @@ class Purchase(models.Model):
    quantity = models.IntegerField()
    price = models.FloatField()
    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
-   
+   user = models.ForeignKey(User, on_delete=models.CASCADE)
    def __str__(self):
       return f"Purchase id:{self.id}"
 

@@ -11,16 +11,23 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.serializers import ValidationError
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.filters import SearchFilter
+# from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from .permission import IsAuthenticatedorReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
+from .filter import ProductFilter
 # Create your views here.
 
 class DepartmentViewset(ModelViewSet):
    queryset = Department.objects.all()
    serializer_class = DepartmentSerializer
+   permission_classes = [IsAuthenticatedorReadOnly]
 
 
 class ProductCategoryViewset(ModelViewSet):
    queryset = ProductCategory.objects.all()
    serializer_class = ProductCategorySerializer
+   permission_classes = [IsAuthenticatedorReadOnly]
+   
    
    def destroy(self, request, *args, **kwargs):
       category = self.get_object()
@@ -38,8 +45,11 @@ class ProductViewset(ModelViewSet):
    queryset = Products.objects.select_related('category','department').all()
    serializer_class = ProductSerializer
    pagination_class = PageNumberPagination
-   filter_backends = [SearchFilter]
+   filter_backends = [SearchFilter, DjangoFilterBackend]
    search_fields = ['name','stock']
+   filterset_class = ProductFilter
+   # filterset_fields = ['category','department']
+   permission_classes = [IsAuthenticatedorReadOnly]
 
 
 
