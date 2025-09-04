@@ -16,7 +16,7 @@ class ProductCategory(models.Model):
 
 class Products(models.Model):
    name = models.CharField(max_length=100)
-   description = models.TextField()
+   description = models.TextField(null=True, blank=True)
    stock = models.IntegerField()
    category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
    department = models.ForeignKey(Department, on_delete=models.CASCADE)

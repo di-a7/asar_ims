@@ -5,10 +5,21 @@ from rest_framework.serializers import ValidationError
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiExample
+from drf_spectacular.types import OpenApiTypes
+from .serializer import LoginSerializer
+
 # Create your views here.
 # User = get_user_model()
 
 class LoginAPI(APIView):
+   
+   @extend_schema(
+      request=LoginSerializer,
+      responses={201: LoginSerializer},
+      description='this is a login api',
+      
+   )
    def post(self, request):
       username = request.data.get('username')
       password = request.data.get('password')

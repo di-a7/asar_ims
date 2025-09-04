@@ -13,6 +13,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.filters import SearchFilter
 # from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from .permission import IsAuthenticatedorReadOnly
+from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
 from .filter import ProductFilter
 # Create your views here.
@@ -20,7 +21,7 @@ from .filter import ProductFilter
 class DepartmentViewset(ModelViewSet):
    queryset = Department.objects.all()
    serializer_class = DepartmentSerializer
-   permission_classes = [IsAuthenticatedorReadOnly]
+   permission_classes = [IsAuthenticated]
 
 
 class ProductCategoryViewset(ModelViewSet):
