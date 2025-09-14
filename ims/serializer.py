@@ -42,3 +42,23 @@ class ProductSerializer(serializers.ModelSerializer):
    
    def get_stock_with_5(self, product: Products):
       return product.stock + 5
+
+class PurchaseItemSerializer(serializers.ModelSerializer):
+   class Meta:
+      model = PurchaseItem
+      fields = ['product']
+
+class PurchaseSerializer(serializers.ModelSerializer):
+   user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+   items = PurchaseItemSerializer(many=True)
+   class Meta:
+      model = Purchase
+      fields = ["quantity","price","supplier","user","items"]
+   
+   def create(self, validated_data):
+      items = validated_data.pop('items')
+      purchase = Purchase.objects.create(**validated_data)
+      
+      for item in items:
+         PurchaseItem.objects.create(purchase = purchase, product = item.get('product'))
+      return purchase

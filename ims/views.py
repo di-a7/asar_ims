@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import *
-from .serializer import DepartmentSerializer, ProductCategorySerializer, ProductSerializer
+from .serializer import *
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework import mixins
@@ -52,6 +52,11 @@ class ProductViewset(ModelViewSet):
    # filterset_fields = ['category','department']
    permission_classes = [IsAuthenticatedorReadOnly]
 
+class PurchaseViewset(ModelViewSet):
+   queryset = Purchase.objects.prefetch_related('items').all()
+   serializer_class = PurchaseSerializer
+   pagination_class = PageNumberPagination
+   permission_classes = [IsAuthenticated]
 
 
 # Generic, Mixin

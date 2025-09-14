@@ -46,5 +46,5 @@ class Purchase(models.Model):
       return f"Purchase id:{self.id}"
 
 class PurchaseItem(models.Model):
-   product = models.ForeignKey(Products, on_delete=models.PROTECT)
-   purchase = models.ForeignKey(Purchase, on_delete=models.PROTECT)
+   product = models.ForeignKey(Products, on_delete=models.PROTECT,related_name='items')
+   purchase = models.ForeignKey(Purchase, on_delete=models.PROTECT,related_name='items')

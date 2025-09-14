@@ -6,6 +6,7 @@ router = routers.DefaultRouter()
 router.register(r'departments',DepartmentViewset, basename='departments')
 router.register(r'categories',ProductCategoryViewset, basename='categories')
 router.register(r'products',ProductViewset, basename='products')
+router.register(r'purchases',PurchaseViewset, basename='purchases')
 
 urlpatterns = [
    # path('departments/', departments),
