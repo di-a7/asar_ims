@@ -161,3 +161,9 @@ SPECTACULAR_SETTINGS = {
 }
 
 AUTH_USER_MODEL = 'core.User'
+
+# Looking to send emails in production? Check out our Email API/SMTP product!
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = '702df129407c21'
+EMAIL_HOST_PASSWORD = 'faa88711cc555b'
+EMAIL_PORT = '2525'

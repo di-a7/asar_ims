@@ -12,7 +12,7 @@ from rest_framework.serializers import ValidationError
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.filters import SearchFilter
 # from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
-from .permission import IsAuthenticatedorReadOnly
+from .permission import IsAuthenticatedorReadOnly, IsAdmin
 from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
 from .filter import ProductFilter
@@ -56,7 +56,7 @@ class PurchaseViewset(ModelViewSet):
    queryset = Purchase.objects.prefetch_related('items').all()
    serializer_class = PurchaseSerializer
    pagination_class = PageNumberPagination
-   permission_classes = [IsAuthenticated]
+   permission_classes = [IsAdmin]
 
 
 # Generic, Mixin
